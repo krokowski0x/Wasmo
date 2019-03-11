@@ -2,24 +2,56 @@
   "name": "wasmo",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:ci": "set CI=true && react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "vulnerabilities": "npm audit",
+    "license": "license-checker --failOn GPLv2",
+    "quality": "concurrently -c \"bgBlue.bold,bgMagenta.bold,yellow\" \"npm:lint\" \"npm:test:ci\""
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run quality && lint-staged",
+      "pre-push": "npm run quality"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "dependencies": {
+    "concurrently": "^4.1.0",
+    "license-checker": "^25.0.1",
+    "lint-staged": "^8.1.5",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-scripts": "2.1.8"
+  },
+  "devDependencies": {
+    "babel-eslint": "9.0.0",
+    "eslint": "5.12.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.3.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-security": "^1.4.0",
+    "husky": "^1.3.1",
+    "prettier": "^1.16.4"
+  }
 }
