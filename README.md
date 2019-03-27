@@ -9,8 +9,9 @@ Wasmo is a web app and a platform that sits between game developers and online g
 | Week/Sprint | Deadline |                      Milestone                       |
 | :---------: | :------: | :--------------------------------------------------: |
 |      1      |  20.03   |      Repo, ESLint, CircleCI setup, kanban board      |
-|      2      |  27.03   |    Database UML model, wireframes, game seed data    |
-|      3      |  10.04   |   Single/multiple games views, user authentication   |
+|      2      |  27.03   |   User authentication, wireframes, game seed data    |
+|      3      |  03.04   |       Database UML model, user authentication        |
+|      4      |  10.04   |             Single/multiple games views              |
 |      5      |  17.04   |          User/developer/admin account views          |
 |      6      |  24.04   |       Game upload view, game code optimization       |
 |      7      |  01.05   | Adding to favorites, stats, saving settings in cache |
