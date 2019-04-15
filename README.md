@@ -4,6 +4,20 @@
 
 Wasmo is a web app and a platform that sits between game developers and online gamers. It allows creators to easily upload their games based on Unity or Unreal Engine 4 to the web, utilizing the power of WASM, WebGL and custom caching strategies. It also allows them to get players' feedback on their work as well as giving them ability to quickly test and share their ideas with broader audience. With the dusk of Flash and Unity Web Player, WASM is on its way to become leading technology for online gaming from 2019 onwards.
 
+## Approximate project timeline
+
+| Week/Sprint | Deadline |                      Milestone                       |
+| :---------: | :------: | :--------------------------------------------------: |
+|      1      |  20.03   |      Repo, ESLint, CircleCI setup, kanban board      |
+|      2      |  27.03   |   User authentication, wireframes, game seed data    |
+|      3      |  03.04   |       Database UML model, user authentication        |
+|      4      |  10.04   |             Single/multiple games views              |
+|      5      |  17.04   |          User/developer/admin account views          |
+|      6      |  24.04   |       Game upload view, game code optimization       |
+|      7      |  01.05   | Adding to favorites, stats, saving settings in cache |
+|      8      |  08.05   |     Production environment setup and deployment      |
+|      9      |  15.05   |                     MVP Release                      |
+
 ## Built with
 
 - [WebAssembly / WASM](https://webassembly.org/)

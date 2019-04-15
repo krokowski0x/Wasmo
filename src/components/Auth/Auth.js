@@ -20,6 +20,7 @@ export default class Auth {
       password: userPassword
     } , function (err) {
       if (err) {
+        console.log(err.description);
         throw new Error(err.description);
       } else {
         return 0;
@@ -68,7 +69,6 @@ export default class Auth {
       history.push("/main");
     } else if (err) {
       history.push("/");
-      console.log(err);
     }
   }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Auth from "../Auth/Auth";
 import history from '../../history';
+import NavBar from '../NavBar/NavBar';
 import './MainPage.scss';
 
 export default class MainPage extends Component {
@@ -38,6 +39,9 @@ export default class MainPage extends Component {
   render() {
     return (
       <div className="MainPage">
+        <div>
+          <NavBar />
+        </div>
         <header className="MainPage-header">
           <h1>Welcome to Wasmo!</h1>
           <button type="button" onClick={this.logout}> Get me out of here!</button>
