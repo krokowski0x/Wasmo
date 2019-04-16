@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { slide as Burger } from 'react-burger-menu';
 import MediaQuery from 'react-responsive';
 import { Menu } from 'semantic-ui-react';
 import NavItems from './NavItems';
-import { slide as Burger } from 'react-burger-menu';
 import './Navbar.scss';
-import logo from './favicon.ico';
+import logo from '../../favicon.ico';
 
 export default class NavBar extends Component {
   constructor() {
@@ -15,11 +15,13 @@ export default class NavBar extends Component {
   }
 
   toggleMenu = () => {
-    const isOpen = !this.state.isOpen;
-    this.setState({ isOpen });
+    const { isOpen } = this.state;
+    const isOpened = !isOpen;
+    this.setState({ isOpen: isOpened });
   };
 
   render() {
+    const { isOpen } = this.state;
     return (
       <Menu secondary className="navBar">
         <Menu.Item>
@@ -30,7 +32,7 @@ export default class NavBar extends Component {
           <NavItems position="right" />
         </MediaQuery>
         <MediaQuery maxWidth={768}>
-          <Burger width={'15%'} right isOpen={this.state.isOpen}>
+          <Burger width='15%' right isOpen={isOpen}>
             <NavItems isOpen={this.isOpen} />
           </Burger>
         </MediaQuery>

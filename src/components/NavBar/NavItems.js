@@ -3,8 +3,9 @@ import { Menu, Icon } from 'semantic-ui-react';
 import './Navbar.scss';
 
 const NavItems = props => {
+  const { position , toggleMenu } = props;  
   return (
-    <Menu.Menu position={props.position} onClick={props.toggleMenu}>
+    <Menu.Menu position={position} onClick={toggleMenu}>
       <Menu.Item as="a">
         <Icon size="large" name="user" />
       </Menu.Item>
