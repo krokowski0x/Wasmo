@@ -11,9 +11,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to Wasmo!' });
-});
 app.get('/users', handlers.getUsers);
 app.get('/users/:id', handlers.getUserById);
 app.post('/users', handlers.createUser);
