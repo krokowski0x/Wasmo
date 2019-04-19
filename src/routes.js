@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Router, Route, Redirect, Switch } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import history from './history';
 import MainPage from './components/MainPage/MainPage';
 import Login from './components/LoginPage/Login';
+import Dashboard from './components/Dashboard/Dashboard';
+import Game from './components/Game';
+import NavBar from './components/NavBar/NavBar';
 
 class WasmoRouter extends PureComponent {
 
@@ -14,12 +17,13 @@ class WasmoRouter extends PureComponent {
   render() {
     return (
       <Router history={history}>
-        <Switch>
+        <main>
+          <NavBar />
           <Route path='/main' component={MainPage} />
           <Route path='/login' component={Login} />
-          <Route exact path='/' component={Login} />
-          <Redirect from='*' to='/' />
-        </Switch>
+          <Route exact path='/' component={Dashboard} />
+          <Route path="/game/:title" component={Game} />
+        </main>
       </Router>
     );
   }
