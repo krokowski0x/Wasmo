@@ -13,6 +13,11 @@ export default class Dashboard extends Component {
   }
 
 	componentDidMount() {
+    const { isUserLoggedIn } = this.state;
+    if(!isUserLoggedIn) {
+      history.push("/login");
+    }
+
     const games = [
       {
         "id": 1,
@@ -111,8 +116,21 @@ export default class Dashboard extends Component {
     new Promise(resolve => setTimeout(resolve, 2000))
       .then(() => this.setState({ gameList: games, arraysReady: true }))
       .catch(e => console.log(e));
-	}
+  }
+  
+  checkIfUserLoggedIn = () => {
+    const { auth } = this.state;
+    const isLogged = auth.isAuthenticated();
+    this.setState({
+      isUserLoggedIn: isLogged
+    });
+  }
 
+  logout = () => {
+    const { auth } = this.state;
+    auth.logout();
+  }
+  
   render() {
     const { gameList, arraysReady } = this.state;
 
