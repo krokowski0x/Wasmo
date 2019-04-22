@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Unity, { UnityContent } from "react-unity-webgl";
+import Comments from './Comments';
 
 export default class Game extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ export default class Game extends Component {
           <button type="button" className="fullscreen" onClick={this.handleFullscreen} onKeyDown={this.handleFullscreen} />
           <div className="title">{title}</div>
         </div>
+        <Comments />
       </div>
     );
   }
