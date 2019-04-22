@@ -24,7 +24,7 @@ export default class Comments extends Component {
     return (
       <div
         style={{
-          textAlign: "center",
+          textAlign: "left",
           padding: "3rem"
         }}
       >
@@ -34,7 +34,7 @@ export default class Comments extends Component {
           placeholder="Add..."
           value={newComment}
           onChange={e => this.setState({ newComment: e.target.value })}
-          style={{ paddingBottom: "3rem", width: "40vw" }}
+          style={{ paddingBottom: "3rem", width: "80vw" }}
         />
         <Button positive onClick={this.onCommentAdd} loading={loading}>Add New</Button>
         {errorMessage ? <Message negative>{errorMessage}</Message> : <div />}
@@ -43,8 +43,8 @@ export default class Comments extends Component {
           <Card.Group centered>
             {comments.map(entry => (
               <Card fluid key={entry.id}>
-                <Card.Content extra textAlign="left">
-                  {entry.createdAt}
+                <Card.Content textAlign="left" style={{ fontWeight: "bold", fontSize: "1.2rem", padding: ".5rem" }}>
+                  {entry.user}
                   <Button
                     floated="right"
                     animated="vertical"
@@ -55,7 +55,7 @@ export default class Comments extends Component {
                     </Button.Content>
                   </Button>
                 </Card.Content>
-                <Card.Content>{entry.comment}</Card.Content>
+                <Card.Content style={{ padding: "1rem" }}>{entry.comment}</Card.Content>
               </Card>
             ))}
           </Card.Group>
