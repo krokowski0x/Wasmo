@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import Auth from "../Auth/Auth";
 import history from "../../history";
 import "./Login.scss";
-
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      auth: new Auth(),
+      auth: this.props.auth,
       isRightOverlayed: true,
       userSignUpName: '',
       userSignUpEmail: '',
@@ -22,8 +20,8 @@ export default class Login extends Component {
   componentDidMount() {
     const { auth } = this.state;
     const isLogged = auth.isAuthenticated();
-    if(isLogged) {
-      history.push("/main");
+    if (isLogged) {
+      history.push("/");
     }
   }
 
@@ -69,19 +67,18 @@ export default class Login extends Component {
   }
 
   login = () => {
-    const {state} = this.state;
-    state.auth.login(state.userSignInName, state.userSignInPassword);
+    const { auth, userSignInName, userSignInPassword } = this.state;
+    auth.login(userSignInName, userSignInPassword);
   }
 
   loginWithSocialMedia = (socialMediaType) => {
-    const {state} = this.state;
-    state.auth.loginSocial(socialMediaType);
+    const { auth } = this.state;
+    auth.loginSocial(socialMediaType);
   }
  
   render() {
     let overlayClass = "container"
-    const { isRightOverlayed, userSignInName, userSignInPassword,
-            userSignUpEmail, userSignUpName, userSignUpPassword } = this.state;
+    const { isRightOverlayed, userSignInName, userSignInPassword, userSignUpEmail, userSignUpName, userSignUpPassword } = this.state;
     if (!isRightOverlayed) {
       overlayClass += " right-panel-active";
     }
@@ -115,9 +112,7 @@ export default class Login extends Component {
                 <span className="bar" />
                 <span className="label">Password</span>
               </div>
-              <button type="submit" className="gradient-bg" onClick={this.signUp}>
-                Sign Up
-              </button>
+              <button type="submit" className="gradient-bg" onClick={this.signUp}>Sign Up</button>
             </form>
           </div>
           <div className="form-container sign-in-container" id="signIn">
@@ -141,31 +136,21 @@ export default class Login extends Component {
                 <span className="bar" />
                 <span className="label">Password</span>
               </div>
-              <a className="forgot-password" href="https://www.google.com/search?client=firefox-b-d&q=forgot+password">
-                Forgot your password?
-              </a>
-              <button type="submit" className="gradient-bg" onClick={this.login}>
-                Sign In
-              </button>
+              <a className="forgot-password" href="https://www.google.com/search?client=firefox-b-d&q=forgot+password">Forgot your password?</a>
+              <button type="submit" className="gradient-bg" onClick={this.login}>Sign In</button>
             </form>
           </div>
           <div className="overlay-container">
             <div className="overlay">
               <div className="overlay-panel overlay-left">
                 <h1>Welcome Back!</h1>
-                <p>
-                    To keep connected with us please login with your personal info
-                </p>
-                <button type="button" className="ghost" id="signIn" onClick={this.toggleOverlay}>
-                  Sign In
-                </button>
+                <p>To keep connected with us please login with your personal info</p>
+                <button type="button" className="ghost" id="signIn" onClick={this.toggleOverlay}>Sign In</button>
               </div>
               <div className="overlay-panel overlay-right">
                 <h1>Welcome Chosen One!</h1>
                 <p>Enter your personal details and join the best gamer community</p>
-                <button type="button" className="ghost" id="signUp" onClick={this.toggleOverlay}>
-                  Sign Up
-                </button>
+                <button type="button" className="ghost" id="signUp" onClick={this.toggleOverlay}>Sign Up</button>
               </div>
             </div>
           </div>
