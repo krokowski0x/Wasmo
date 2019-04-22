@@ -1,7 +1,5 @@
-
-
 import auth0 from 'auth0-js';
-import history from '../../history';
+import history from './history';
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
@@ -18,9 +16,8 @@ export default class Auth {
       email: userEmail,
       username: userName,
       password: userPassword
-    } , function (err) {
+    } , (err) => {
       if (err) {
-        console.log(err.description);
         throw new Error(err.description);
       } else {
         return 0;
@@ -36,7 +33,7 @@ export default class Auth {
       password: userPassword,
       scope: 'openid',
       responseType: 'code'
-    } , function (err, authResult) {
+    } , (err, authResult) => {
       if (err) {
         throw new Error(err.description);
       } else {
@@ -53,41 +50,37 @@ export default class Auth {
   }
 
   logout = () => {
-    // Clear access token and ID token from local storage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('user');
     clearTimeout(this.tokenRenewalTimeout);
-    history.push("/")
+    history.push("/login")
   }
 
   handleAuthentication = (err, authResult) => {
-    // If authentication is done correctly move user to main component
     if (authResult && authResult.accessToken && authResult.idToken) {
       this.setSession(authResult);
-      history.push("/main");
-    } else if (err) {
       history.push("/");
+    } else if (err) {
+      history.push("/login");
     }
   }
 
   isAuthenticated = () => {
-    // Check if users session is still active
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
   }
 
   setSession = (authResult) => {
-    // Set all sesion crucial parameters such as acces token expiration time and user name
-    // also move user to main component
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
     this.auth0.client.userInfo(authResult.accessToken, (err, user) => {
       localStorage.setItem('user', JSON.stringify(user));
-      history.push('/main');
+      history.push('/');
     });
   }
 
