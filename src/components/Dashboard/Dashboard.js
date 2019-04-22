@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Container, Loader, Segment, Card, Image } from "semantic-ui-react";
 
+import games from './seed_games';
+
 export default class Dashboard extends Component {
   constructor() {
     super();
@@ -13,122 +15,10 @@ export default class Dashboard extends Component {
   }
 
 	componentDidMount() {
-    const { isUserLoggedIn } = this.state;
-    if(!isUserLoggedIn) {
-      history.push("/login");
-    }
-
-    const games = [
-      {
-        "id": 1,
-        "title": "Tankhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 2,
-        "title": "Diggerhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 3,
-        "title": "ProMeteuszhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 4,
-        "title": "Tankhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 5,
-        "title": "Diggerhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 6,
-        "title": "ProMeteuszhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 7,
-        "title": "Tankhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 8,
-        "title": "Diggerhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 9,
-        "title": "ProMeteuszhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 10,
-        "title": "Tankhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 11,
-        "title": "Diggerhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 12,
-        "title": "ProMeteuszhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 13,
-        "title": "Tankhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 14,
-        "title": "Diggerhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      },
-      {
-        "id": 15,
-        "title": "ProMeteuszhtml",
-        "description": "Just a placeholder for a real game description.",
-        "thumbnail": "https://image.flaticon.com/icons/svg/141/141070.svg",
-      }
-      
-    ];
-
     // This is just a fetch() mock, to show loading functionality
     new Promise(resolve => setTimeout(resolve, 2000))
       .then(() => this.setState({ gameList: games, arraysReady: true }))
       .catch(e => console.log(e));
-  }
-  
-  checkIfUserLoggedIn = () => {
-    const { auth } = this.state;
-    const isLogged = auth.isAuthenticated();
-    this.setState({
-      isUserLoggedIn: isLogged
-    });
-  }
-
-  logout = () => {
-    const { auth } = this.state;
-    auth.logout();
   }
   
   render() {

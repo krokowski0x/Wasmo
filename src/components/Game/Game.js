@@ -1,13 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
 import Unity, { UnityContent } from "react-unity-webgl";
 
-export default class Game extends React.Component {
+export default class Game extends Component {
   constructor(props) {
     super(props);
     // eslint-disable-next-line react/prop-types
     const { match: { params: { title } } } = this.props;
 
     this.state = {
+      title,
       unityContent: new UnityContent(
         `../seed_data/${title}/${title}.json`,
         `../seed_data/${title}/UnityLoader.js`
@@ -23,15 +24,15 @@ export default class Game extends React.Component {
   }
 
   render() {
-    const { unityContent } = this.state;
+    const { unityContent, title } = this.state;
 
     return (
       <div className="webgl-content">
-        <Unity unityContent={unityContent} height="100%" width="950px" />
+        <h1>{title}</h1>
+        <Unity unityContent={unityContent} height="100%" />
         <div className="footer">
-          <div className="webgl-logo" />
           <button type="button" className="fullscreen" onClick={this.handleFullscreen} onKeyDown={this.handleFullscreen} />
-          <div className="title">TapMeter</div>
+          <div className="title">{title}</div>
         </div>
       </div>
     );
