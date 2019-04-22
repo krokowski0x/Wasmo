@@ -26,8 +26,16 @@ export default class Dashboard extends Component {
 
     return (
       <div>
-        <Container style={{ padding: "1%", margin: "5% 0" }}>
-          <h2>Our games:</h2>
+        <Container style={{ padding: "1%", margin: "2% 0" }}>
+          <h2>Most popular games:</h2>
+          <div
+            style={{
+              height: "3px",
+              width: "100%",
+              background: "linear-gradient(45deg, #00d664, cyan)",
+              marginBottom: "5%"
+            }}
+          />
           {arraysReady ? (
             <Card.Group itemsPerRow={3} stackable>
               {gameList.map(game => {
