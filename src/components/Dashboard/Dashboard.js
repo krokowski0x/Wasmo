@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Container, Loader, Segment, Card, Image } from "semantic-ui-react";
 
-import games from './seed_games';
-
 export default class Dashboard extends Component {
   constructor() {
     super();
@@ -15,9 +13,9 @@ export default class Dashboard extends Component {
   }
 
 	componentDidMount() {
-    // This is just a fetch() mock, to show loading functionality
-    new Promise(resolve => setTimeout(resolve, 2000))
-      .then(() => this.setState({ gameList: games, arraysReady: true }))
+    fetch('/games')
+      .then(res => res.json())
+      .then(games => this.setState({ gameList: games, arraysReady: true }))
       .catch(e => console.log(e));
   }
   

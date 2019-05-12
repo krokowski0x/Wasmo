@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { Card, Button, Input, Icon, Message } from "semantic-ui-react";
 
-import comments from './seed_comments';
-
 export default class Comments extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comments,
+      comments: [],
       newComment: "",
       loading: false,
       errorMessage: ""
@@ -15,7 +13,10 @@ export default class Comments extends Component {
   }
 
   componentDidMount() {
-    this.setState({ comments, loading: false });
+    fetch('/comments/1')
+    .then(res => res.json())
+    .then(comments => this.setState({ comments, loading: false }))
+    .catch(e => console.log(e));
   }
 
   render() {
@@ -44,7 +45,7 @@ export default class Comments extends Component {
             {comments.map(entry => (
               <Card fluid key={entry.id}>
                 <Card.Content textAlign="left" style={{ fontWeight: "bold", fontSize: "1.2rem", padding: ".5rem" }}>
-                  {entry.user}
+                  {entry.username}
                   <Button
                     floated="right"
                     animated="vertical"
