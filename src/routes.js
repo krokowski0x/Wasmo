@@ -12,7 +12,7 @@ import Settings from './components/Settings/Settings';
 import Upload from './components/Upload/Upload';
 import UserDashboard from './components/User/UserDashboard';
 
-class WasmoRouter extends Component {
+export default class WasmoRouter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,5 +51,3 @@ class WasmoRouter extends Component {
     );
   }
 };
-
-export default WasmoRouter;
