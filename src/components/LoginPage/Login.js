@@ -67,8 +67,9 @@ export default class Login extends Component {
   }
 
   login = () => {
-    const { auth, userSignInName, userSignInPassword } = this.state;
-    auth.login(userSignInName, userSignInPassword);
+    // const { auth, userSignInName, userSignInPassword } = this.state;
+    // auth.login(userSignInName, userSignInPassword);
+    history.push("/");
   }
 
   loginWithSocialMedia = (socialMediaType) => {

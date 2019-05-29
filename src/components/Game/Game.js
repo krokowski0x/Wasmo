@@ -30,11 +30,11 @@ export default class Game extends Component {
     return (
       <div className="webgl-content">
         <h1 style={{ fontWeight: "bold", margin: "1rem" }}>{title}</h1>
-        <Unity unityContent={unityContent} height="80%" style={{ margin: "1rem", padding: "1rem" }} />
+        {/* <Unity unityContent={unityContent} height="80%" style={{ margin: "1rem", padding: "1rem" }} />
         <div className="footer">
           <button type="button" className="fullscreen" onClick={this.handleFullscreen} onKeyDown={this.handleFullscreen} />
-        </div>
-        <Comments />
+        </div> */}
+        <Comments id="1" />
       </div>
     );
   }
