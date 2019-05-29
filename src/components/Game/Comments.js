@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from "react";
 import { Card, Button, Input, Icon, Message } from "semantic-ui-react";
 
@@ -5,18 +6,65 @@ export default class Comments extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // eslint-disable-next-line react/prop-types
+      id: this.props.id,
       comments: [],
       newComment: "",
       loading: false,
       errorMessage: ""
     };
+
+    this.handleCommentChange = this.handleCommentChange.bind(this);
   }
 
   componentDidMount() {
-    fetch('/comments/1')
-    .then(res => res.json())
-    .then(comments => this.setState({ comments, loading: false }))
-    .catch(e => console.log(e));
+    this.getCommentList();
+  }
+
+  getCommentList = () => {
+    fetch(`/comments/${this.state.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(comments => this.setState({ comments, loading: false }))
+      .catch(err => console.error(err));
+  };
+
+  onCommentAdd = () => {
+    this.setState({ loading: true });
+      fetch(`/comments/${this.state.id}`, {
+        method: "POST",
+        body: JSON.stringify({
+          comment: this.state.newComment
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(() => this.getCommentList()).catch(err =>console.error(err));
+  };
+
+  onCommentRemove = async id => {
+    try {
+      await fetch(`/comments/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      this.setState({ newComment: "" });
+      await this.getCommentList();
+    } catch (err) {
+      this.setState({
+        errorMessage: "Hey, don't even try that! It's not Your comment!"
+      });
+    }
+  };
+
+  handleCommentChange(event) {
+    this.setState({ newComment: event.target.value });
   }
 
   render() {
@@ -25,7 +73,7 @@ export default class Comments extends Component {
     return (
       <div
         style={{
-          textAlign: "left",
+          textAlign: "center",
           padding: "3rem"
         }}
       >
@@ -34,8 +82,8 @@ export default class Comments extends Component {
         <Input
           placeholder="Add..."
           value={newComment}
-          onChange={e => this.setState({ newComment: e.target.value })}
-          style={{ paddingBottom: "3rem", width: "80vw" }}
+          onChange={this.handleCommentChange}
+          style={{ paddingBottom: "3rem", width: "70vw" }}
         />
         <Button positive onClick={this.onCommentAdd} loading={loading}>Add New</Button>
         {errorMessage ? <Message negative>{errorMessage}</Message> : <div />}
@@ -44,11 +92,12 @@ export default class Comments extends Component {
           <Card.Group centered>
             {comments.map(entry => (
               <Card fluid key={entry.id}>
-                <Card.Content textAlign="left" style={{ fontWeight: "bold", fontSize: "1.2rem", padding: ".5rem" }}>
-                  {entry.username}
+                <Card.Content textAlign="left">
+                  <b>{entry.username}</b>
                   <Button
                     floated="right"
                     animated="vertical"
+                    onClick={() => this.onCommentRemove(entry.id)}
                   >
                     <Button.Content hidden>Delete</Button.Content>
                     <Button.Content visible>
@@ -56,7 +105,7 @@ export default class Comments extends Component {
                     </Button.Content>
                   </Button>
                 </Card.Content>
-                <Card.Content style={{ padding: "1rem" }}>{entry.comment}</Card.Content>
+                <Card.Content>{entry.comment}</Card.Content>
               </Card>
             ))}
           </Card.Group>
