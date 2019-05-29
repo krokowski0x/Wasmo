@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Container, Loader, Segment, Card, Image } from "semantic-ui-react";
 
+import GameRating from './GameRating'
+
 export default class Dashboard extends Component {
   constructor() {
     super();
@@ -46,6 +48,9 @@ export default class Dashboard extends Component {
                     }}
                     key={game.id}
                   >
+                    <Card.Content extra textAlign="right">
+                      <GameRating id={game.id} />
+                    </Card.Content>
                     <Link to={`/game/${game.title}`} key={game.id}>
                       <Image
                         src={game.thumbnail}

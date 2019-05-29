@@ -1,26 +1,36 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import { Card, Icon, Image, Grid, Segment, Loader } from 'semantic-ui-react'
+import { Card, Image, Grid, Segment, Loader } from 'semantic-ui-react'
+
+import GameRating from '../Dashboard/GameRating'
 
 export default class UserDashboard extends Component {
 constructor() {
   super();
 
   this.state = {
+    favoriteGame: {},
     gameList: [],
     arraysReady: false,
   };
 }
 
-componentDidMount() {
-  fetch('/games')
+async componentDidMount() {
+  const query = [];
+  for (let game in localStorage) query.push(game);
+
+  await fetch(`/games/${query[0]}`)
+  .then(res => res.json())
+  .then(game => this.setState({ favoriteGame: game, arraysReady: true }))
+  .catch(e => console.log(e));
+  await fetch('/games')
     .then(res => res.json())
     .then(games => this.setState({ gameList: games, arraysReady: true }))
     .catch(e => console.log(e));
 }
 
 render()  {
-  const { gameList, arraysReady } = this.state;
+  const { gameList, arraysReady, favoriteGame } = this.state;
 
   return (
     <Grid columns={2}>
@@ -34,21 +44,57 @@ render()  {
             </Card.Meta>
             <Card.Description>Matthew is a musician living in Nashville.</Card.Description>
           </Card.Content>
-          <Card.Content extra>
-            <Icon name='user'>22 Friends</Icon>
-          </Card.Content>
         </Card>
       </Grid.Column>
       <Grid.Column width={10}>
-      <h2>Your favourite games:</h2>
-      <div
-            style={{
+        <h2>Your favorite games:</h2>
+        <div
+          style={{
               height: "3px",
               width: "100%",
               background: "linear-gradient(45deg, #00d664, cyan)",
               marginBottom: "5%"
             }}
-          />
+        />
+        {favoriteGame ? (
+         <Card
+                    style={{
+                      width: "100%",
+                      padding: "1%",
+                      boxShadow: "4px 4px 2px 0px rgba(0,0,0,0.3)",
+                      borderRadius: "20px"
+                    }}
+                    key={favoriteGame.id}
+                  >
+                    <Card.Content extra textAlign="right">
+                      <GameRating id={favoriteGame.id} />
+                    </Card.Content>
+                    <Link to={`/game/${favoriteGame.title}`} key={favoriteGame.id}>
+                      <Image
+                        src={favoriteGame.thumbnail}
+                        style={{ height: "4rem" }}
+                        centered
+                      />
+                      <Card.Content textAlign="center">
+                        <Card.Header>{favoriteGame.title}</Card.Header>
+                        <Card.Meta>{favoriteGame.description}</Card.Meta>
+                      </Card.Content>
+                    </Link>
+                  </Card>
+                   ) : (
+                    <Segment loading>
+                      <Loader active inline="centered" />
+                    </Segment>
+                  )}
+        <h2>Games you played:</h2>
+        <div
+          style={{
+              height: "3px",
+              width: "100%",
+              background: "linear-gradient(45deg, #00d664, cyan)",
+              marginBottom: "5%"
+          }}
+        />
         {arraysReady ? (
           <Card.Group>
             {gameList.map(game => {
