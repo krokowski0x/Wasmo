@@ -2,7 +2,7 @@ const comments = [
   {
     "id": 1,
     "user_id": 1,
-    "username": "krokowski0x",
+    "username": "krokowski0x (Dev)",
     "game_id": 1,
     "createdAt": new Date().toString(),
     "comment": "Nice game!",
@@ -26,7 +26,7 @@ const comments = [
   {
     "id": 4,
     "user_id": 4,
-    "username": "Szczyrk",
+    "username": "Szczyrk (Dev)",
     "game_id": 1,
     "createdAt": new Date().toString(),
     "comment": "Pretty cool. I'd rate it 3/10.",

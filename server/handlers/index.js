@@ -45,7 +45,7 @@ const addCommentByGameId = async (req, res) => {
   const newComment = {
     id: comments.length,
     user_id: 1,
-    username: "krokowski0x",
+    username: "krokowski0x (Dev)",
     game_id: gameId,
     createdAt: new Date().toString(),
     comment: req.body.comment,
@@ -57,7 +57,10 @@ const addCommentByGameId = async (req, res) => {
 
 const removeCommentByCommentId = async (req, res) => {
   const commentId = Number(req.params.comment_id);
+
+  console.log(comments);
   comments = comments.filter(comment => comment.id !== commentId);
+  console.log(comments);
 
   res.status(200);
 };
