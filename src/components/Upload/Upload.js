@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Header, Icon, Segment, Divider, Grid, Input } from 'semantic-ui-react'
 
+import history from '../../history';
+
 import Basic from './Basic'
 
 export default class Upload extends Component {
@@ -10,8 +12,7 @@ export default class Upload extends Component {
     this.state = {
       title: "",
       description: "",
-      thumbnail: "",
-      loading: false
+      thumbnail: ""
     }
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -20,7 +21,6 @@ export default class Upload extends Component {
   }
 
   onGameAdd = () => {
-    this.setState({ loading: true });
       fetch('/games', {
         method: "POST",
         body: JSON.stringify({
@@ -31,7 +31,8 @@ export default class Upload extends Component {
         headers: {
           "Content-Type": "application/json"
         }
-      }).then(() => this.getCommentList()).catch(err =>console.error(err));
+      }).catch(err =>console.error(err));
+      history.push("/")
   };
 
   handleTitleChange(event) {
@@ -68,8 +69,8 @@ export default class Upload extends Component {
               <h3>Description</h3>
               <Input value={description} onChange={this.handleDescriptionChange} placeholder='Add description...' />
               <h3>Thumbnail</h3>
-              <Input value={thumbnail} onChange={this.handleThumbnailChange} placeholder='Pick a thumbnail...' action='Search' />
-              <Button primary onClick={this.onGameAdd}>Upload</Button>
+              <Input value={thumbnail} onChange={this.handleThumbnailChange} placeholder='Pick a thumbnail...' />
+              <Button primary onClick={this.onGameAdd} style={{ margin: "1rem auto" }}>Upload</Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>

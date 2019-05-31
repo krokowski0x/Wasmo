@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDropzone} from 'react-dropzone';
-import { Button, Header, Icon, Segment, Divider, Grid, Input } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 
 const Basic = () => {
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
@@ -10,15 +10,11 @@ const Basic = () => {
   ));
 
   return (
-    <section className="container">
-      <div {...getRootProps({className: 'dropzone'})}>
-        <input {...getInputProps()} />
-      </div>
-      <aside>
-        <h4>Files</h4>
-        <ul>{files}</ul>
-      </aside>
-    </section>
+    <div {...getRootProps({className: 'dropzone'})}>
+      <input {...getInputProps()} />
+      <Button>Add source code here</Button>
+      <ul>{files}</ul>
+    </div>
   );
 }
 

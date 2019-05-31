@@ -17,7 +17,7 @@ constructor() {
 
 async componentDidMount() {
   const query = [];
-  for (let game in localStorage) query.push(game);
+  for (const game in localStorage) query.push(game);
 
   await fetch(`/games/${query[0]}`)
   .then(res => res.json())
@@ -38,11 +38,10 @@ render()  {
         <Card style={{ marginLeft: "3rem", height: "80vh" }}>
           <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
           <Card.Content>
-            <Card.Header>Matthew</Card.Header>
+            <Card.Header>krokowski0x</Card.Header>
             <Card.Meta>
-              <span className='date'>Joined in 2015</span>
+              <b>You're a developer!</b>
             </Card.Meta>
-            <Card.Description>Matthew is a musician living in Nashville.</Card.Description>
           </Card.Content>
         </Card>
       </Grid.Column>
@@ -57,19 +56,19 @@ render()  {
             }}
         />
         {favoriteGame ? (
-         <Card
-                    style={{
+          <Card
+            style={{
                       width: "100%",
                       padding: "1%",
                       boxShadow: "4px 4px 2px 0px rgba(0,0,0,0.3)",
                       borderRadius: "20px"
                     }}
-                    key={favoriteGame.id}
-                  >
-                    <Card.Content extra textAlign="right">
-                      <GameRating id={favoriteGame.id} />
-                    </Card.Content>
-                    <Link to={`/game/${favoriteGame.title}`} key={favoriteGame.id}>
+            key={favoriteGame.id}
+          >
+            <Card.Content extra textAlign="right">
+              <GameRating id={favoriteGame.id} />
+            </Card.Content>
+            <Link to={`/game/${favoriteGame.title}`} key={favoriteGame.id}>
                       <Image
                         src={favoriteGame.thumbnail}
                         style={{ height: "4rem" }}
@@ -79,13 +78,13 @@ render()  {
                         <Card.Header>{favoriteGame.title}</Card.Header>
                         <Card.Meta>{favoriteGame.description}</Card.Meta>
                       </Card.Content>
-                    </Link>
-                  </Card>
-                   ) : (
-                    <Segment loading>
-                      <Loader active inline="centered" />
-                    </Segment>
-                  )}
+            </Link>
+          </Card>
+        ) : (
+          <Segment loading>
+            <Loader active inline="centered" />
+          </Segment>
+        )}
         <h2>Games you played:</h2>
         <div
           style={{
