@@ -43,24 +43,19 @@ export default class Comments extends Component {
         headers: {
           "Content-Type": "application/json"
         }
-      }).then(() => this.getCommentList()).catch(err =>console.error(err));
+      }).catch(err =>console.error(err));
+      this.getCommentList()
   };
 
-  onCommentRemove = async id => {
-    try {
-      await fetch(`/comments/${id}`, {
+  onCommentRemove = id => {
+    this.setState({ loading: true });
+      fetch(`/comments/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
         }
-      });
-      this.setState({ newComment: "" });
-      await this.getCommentList();
-    } catch (err) {
-      this.setState({
-        errorMessage: "Hey, don't even try that! It's not Your comment!"
-      });
-    }
+      }).catch(err =>console.error(err));
+      this.getCommentList();
   };
 
   handleCommentChange(event) {
