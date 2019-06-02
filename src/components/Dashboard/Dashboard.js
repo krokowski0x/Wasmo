@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Container, Loader, Segment, Card, Image } from "semantic-ui-react";
-
-import GameRating from './GameRating'
+import { Container, Loader, Segment, Card, Image, Rating } from "semantic-ui-react";
 
 export default class Dashboard extends Component {
   constructor() {
@@ -15,10 +13,14 @@ export default class Dashboard extends Component {
   }
 
 	componentDidMount() {
+    this.getGames();
+  }
+
+  getGames() {
     fetch('/games')
-      .then(res => res.json())
-      .then(games => this.setState({ gameList: games, arraysReady: true }))
-      .catch(e => console.log(e));
+    .then(res => res.json())
+    .then(games => this.setState({ gameList: games, arraysReady: true }))
+    .catch(e => console.log(e));
   }
   
   render() {
@@ -49,7 +51,18 @@ export default class Dashboard extends Component {
                     key={game.id}
                   >
                     <Card.Content extra textAlign="right">
-                      <GameRating id={game.id} />
+                      <Rating
+                        style={{ marginRight: "0.75rem" }}
+                        size="huge"
+                        icon="heart"
+                        onClick={() => {
+                          if (!localStorage.getItem(game.id)) localStorage.setItem(game.id, true);
+                          else localStorage.removeItem(game.id);
+                          this.getGames();
+                        }}
+                        rating={!!localStorage.getItem(game.id)}
+                        maxRating={1}
+                      />
                     </Card.Content>
                     <Link to={`/game/${game.title}`} key={game.id}>
                       <Image
