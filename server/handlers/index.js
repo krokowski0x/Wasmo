@@ -16,7 +16,7 @@ const getGameById = async (req, res) => {
 
 const addNewGame = async (req, res) => {
   const newGame = {
-    id: games.length,
+    id: games.length+1,
     title: req.body.title,
     description: req.body.description,
     thumbnail: req.body.thumbnail || "https://image.flaticon.com/icons/svg/141/141070.svg",
@@ -43,7 +43,7 @@ const getCommentsByGameId = async (req, res) => {
 const addCommentByGameId = async (req, res) => {
   const gameId = Number(req.params.game_id);
   const newComment = {
-    id: comments.length,
+    id: comments.length+1,
     user_id: 1,
     username: "krokowski0x (Dev)",
     game_id: gameId,
