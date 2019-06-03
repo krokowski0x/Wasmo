@@ -1,0 +1,16 @@
+{
+"companyName": "DefaultCompany",
+"productName": "Toxic Townsmen",
+"productVersion": "1.0",
+"dataUrl": "Toxic_Towsmen_kit_html.data.unityweb",
+"wasmCodeUrl": "Toxic_Towsmen_kit_html.wasm.code.unityweb",
+"wasmFrameworkUrl": "Toxic_Towsmen_kit_html.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"backgroundUrl": "Toxic_Towsmen_kit_html.jpg",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#FFFFFF",
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.1.4f1"
+}

@@ -1,0 +1,15 @@
+{
+"companyName": "DefaultCompany",
+"productName": "The Fallen Chronicler",
+"productVersion": "1.0",
+"dataUrl": "The_Fallen_Chronicler_kit_html.data.unityweb",
+"wasmCodeUrl": "The_Fallen_Chronicler_kit_html.wasm.code.unityweb",
+"wasmFrameworkUrl": "The_Fallen_Chronicler_kit_html.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#000000",
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.1.4f1"
+}
