@@ -31,7 +31,7 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "auth0-js": "^9.10.1",
+    "auth0-js": "^9.13.2",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "dotenv": "^7.0.0",
